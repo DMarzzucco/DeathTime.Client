@@ -1,13 +1,16 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Home } from "./page"
+import { AuthProvider } from "./context"
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   )
 }
 

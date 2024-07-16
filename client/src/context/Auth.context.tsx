@@ -5,9 +5,7 @@ export const AuthContext = createContext<contextProps | undefined>(undefined);
 
 export const useAuth = () => {
     const context = useContext(AuthContext)
-    if (!context) {
-        throw new Error(`${Error}`)
-    }
+    if (!context) { throw new Error(`${Error}`) }
     return context;
 }
 const AuthProvider: React.FC<ProviderInt> = ({ children }) => {

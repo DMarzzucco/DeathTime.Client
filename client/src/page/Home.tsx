@@ -1,7 +1,10 @@
+import { Counter } from "../components";
+
 function Home() {
     return (
-        <section>
+        <section className="flex flex-col justify-center items-center w-full h-screen ">
             <div>World</div>
+            <Counter/>
         </section>
     )
 }

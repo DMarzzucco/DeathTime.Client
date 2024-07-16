@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import { BsDate } from "../db/db";
 
+export const timerRegister = (_req:Request, res:Response) =>{
+    return res.status(200).json ({message:"fecha limite aun no alcanzada"})
+}
 export const getRegister = async (_req: Request, res: Response) => {
     try {
         const date = await BsDate.query('SELECT * FROM users');
@@ -26,13 +29,14 @@ export const postRegister = async (req: Request, res: Response) => {
         return res.status(500).json({ message: `${error}` })
     }
 }
-export const deleteAllRegister = async (_req: Request, res: Response) => {
+export const deleteRegister = async (req: Request, res: Response) => {
+    const userId = req.params.id;
     try {
-        const result = await BsDate.query('DELETE FROM users ');
+        const result = await BsDate.query('DELETE FROM users WHERE id = $1', [userId]);
         if (!result) {
-            return res.status(400).json({ message: "no hay datos" })
+            return res.status(400).json({ message: `usario ${userId} no fue encontrado` })
         }
-        return res.status(200).json({ message: "Todos los datos fueron eliminados" })
+        return res.status(200).json({ message: `El usuario ${userId} fue eliminado` })
     } catch (error) {
         return res.status(500).json({ message: `${error}` })
     }

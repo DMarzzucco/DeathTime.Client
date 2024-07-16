@@ -23,7 +23,6 @@ export class App {
     }
 
     private Routes(): void {
-        // poner rutas aca GET,PUT,DELETE
         this.app.use('/api', UserRoutes)
     }
     settings() {

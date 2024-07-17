@@ -24,6 +24,7 @@ export const postRegister = async (req: Request, res: Response) => {
         if (!dateBas) {
             return res.status(400).json({ message: "dates not found" })
         }
+        console.log ('usuario creado')
         return res.status(200).json({ message: `Usario creado` })
     } catch (error) {
         return res.status(500).json({ message: `${error}` })

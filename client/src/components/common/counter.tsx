@@ -11,7 +11,7 @@ const CounterLimit: React.FC = () => {
     }, [])
     const formatNumber = (num: number) => num.toString().padStart(2, '0');
     return (
-        <div className="flex flex-col justify-center items-center w-full">
+        <div className="flex flex-col my-4 justify-center items-center w-full">
             <div className=" flex flex-row justify-center items-center">
                 <NumberDate>{dateTime.getFullYear()}</NumberDate>
                 <NumberDate>- {formatNumber(dateTime.getMonth() + 1)} -</NumberDate>

@@ -8,7 +8,7 @@ export const NumberDate: React.FC<parrafProps> = ({ children }) => {
 }
 export const LimitTimer: React.FC = () => {
     return (
-        <p>2024-07-26 <span className="font-bold">{"<>"}</span> 17:16:00</p>
+        <p>2024-07-17 <span className="font-bold">{"<>"}</span> 12:06:00</p>
     )
 }
 export const delButton: React.FC = () => {

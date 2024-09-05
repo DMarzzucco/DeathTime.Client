@@ -1,12 +1,13 @@
 import { Router } from "express";
-import { deleteRegister, getRegister, postRegister, updateRegister } from "../controllers/user.controllers";
-import { verifyTime } from "../middleware/middleware";
+import { verifyTime } from "../middleware/db.middleware";
+import UserControllers from "../controllers/user.controller";
 
 const UserRoutes = Router()
+const Controller = new UserControllers()
 
-UserRoutes.get('/users', getRegister);
-UserRoutes.post('/users', verifyTime, postRegister);
-UserRoutes.delete('/users/:id', verifyTime, deleteRegister)
-UserRoutes.put('/users/:id', updateRegister);
+UserRoutes.get('/users', Controller.getRegister);
+UserRoutes.post('/users', verifyTime, Controller.postRegister);
+UserRoutes.delete('/users/:id', verifyTime, Controller.deleteRegister)
+UserRoutes.put('/users/:id', Controller.updateRegister);
 
 export default UserRoutes;

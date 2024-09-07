@@ -1,57 +1,60 @@
-import { dateCreate, promsCreate, updateCreate } from "../interface/global.interface";
+import { dateCreate, updateCreate, ServiceResponse } from "../interface/global.interface";
 import { prisma } from "../prisma/prisma.service";
-import { users } from "@prisma/client"
+import { Prisma, users } from "@prisma/client"
 import { ResponseStatudsHTTPS } from "../utils/custom/https.custom";
 
 export default class UserService {
 
-    async getAll(): Promise<users[]> {
+    async getAll(): Promise<ServiceResponse<users[]>> {
         try {
-            return await prisma.users.findMany();
+            const users = await prisma.users.findMany();
+            return ResponseStatudsHTTPS.succes(users);
         } catch (error: any) {
-            throw ResponseStatudsHTTPS.erorServer("Error server:", error.message)
+            return ResponseStatudsHTTPS.errorServer("Error server:", error.message);
         }
     }
-    async getByid(id: number): Promise<users> {
+    async getByid(id: number): Promise<ServiceResponse<users>> {
         try {
-            const result = await prisma.users.findUnique({ where: { id: id } })
-            if (!result) {
-                throw ResponseStatudsHTTPS.notFound()
+            const user = await prisma.users.findUnique({ where: { id: id } })
+            if (!user) {
+                return ResponseStatudsHTTPS.notFound()
             }
-            throw ResponseStatudsHTTPS.succes
+            return ResponseStatudsHTTPS.succes(user)
         } catch (error: any) {
-            throw ResponseStatudsHTTPS.erorServer(error.message)
+            return ResponseStatudsHTTPS.errorServer(error.message)
         }
     }
-    async create(data: dateCreate): Promise<promsCreate> {
-        if (!data) {
-            throw ResponseStatudsHTTPS.conflict()
-        }
+    async create(data: dateCreate): Promise<ServiceResponse<dateCreate>> {
         try {
             const result = await prisma.users.create({ data: data })
-            throw ResponseStatudsHTTPS.cretae(result)
+            return ResponseStatudsHTTPS.cretae(result)
         } catch (error: any) {
-            throw ResponseStatudsHTTPS.erorServer(error.message)
-        }
-    }
-    async update(id: number, data: updateCreate): Promise<updateCreate> {
-        try {
-            if (!id) {
-                throw ResponseStatudsHTTPS.notFound()
+            if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
+                return ResponseStatudsHTTPS.conflict(`This name already exists`)
             }
-            return await prisma.users.update({ where: { id: id }, data: data })
-        } catch (error: any) {
-            throw ResponseStatudsHTTPS.erorServer(error.message)
+            return ResponseStatudsHTTPS.errorServer(error.message)
         }
     }
-    async deleteUser(id: number): Promise<users> {
-        if (!id) {
-            throw ResponseStatudsHTTPS.notFound(`User with id: ${id} not found`)
-        }
+    async update(id: number, data: updateCreate): Promise<ServiceResponse<updateCreate>> {
         try {
-            return await prisma.users.delete({ where: { id: id } })
+            const user = await prisma.users.update({ where: { id: id }, data: data })
+            if (!user) {
+                return ResponseStatudsHTTPS.notFound()
+            }
+            return ResponseStatudsHTTPS.succes(user)
         } catch (error: any) {
-            throw ResponseStatudsHTTPS.erorServer(error.message)
+            return ResponseStatudsHTTPS.errorServer(error.message)
+        }
+    }
+    async deleteUser(id: number): Promise<ServiceResponse<users>> {
+        try {
+            const user = await prisma.users.delete({ where: { id: id } })
+            if (!user) {
+                return ResponseStatudsHTTPS.notFound(`User with id: ${id} not found`)
+            }
+            return ResponseStatudsHTTPS.succes(user)
+        } catch (error: any) {
+            return ResponseStatudsHTTPS.errorServer(error.message)
         }
     }
 }

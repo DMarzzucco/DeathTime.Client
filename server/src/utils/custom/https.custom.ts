@@ -1,4 +1,4 @@
-import { httpsStatusCode } from "../ts";
+import { httpsStatusCode } from "../enum/https.enum";
 
 export class ResponseStatudsHTTPS {
 
@@ -14,7 +14,7 @@ export class ResponseStatudsHTTPS {
     static conflict(message: string = "Conflict") {
         return { statusCode: httpsStatusCode.CONFLICT, body: { message } }
     }
-    static erorServer(message: string, details: string = "Internal Error Server") {
+    static errorServer(message: string, details: string = "Internal Error Server") {
         return { statusCode: httpsStatusCode.INTERNAL_SERVER_ERROR, body: { message, details } }
     }
 }

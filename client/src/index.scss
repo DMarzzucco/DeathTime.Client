@@ -60,6 +60,18 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+label {
+  font-weight: bold;
+}
+
+input {
+  margin: 6px 0px;
+  padding: 5px;
+  border: 1px solid slategray;
+  border-radius: 0.375rem;
+  width: 100%;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

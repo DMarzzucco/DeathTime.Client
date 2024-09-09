@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { LimitTimer, NumberDate } from "../assets/assets";
+import {  NumberDate } from "../ui/comps.ui";
 
 const CounterLimit: React.FC = () => {
     const [dateTime, setDateTime] = useState(new Date());
@@ -20,7 +20,6 @@ const CounterLimit: React.FC = () => {
                 <NumberDate>{formatNumber(dateTime.getMinutes())} :</NumberDate>
                 <NumberDate>{formatNumber(dateTime.getSeconds())}</NumberDate>
             </div>
-            <LimitTimer/>
         </div>
     )
 }

@@ -3,9 +3,8 @@ import { dateCreate } from "../interface/global.interface";
 import UserService from "../service/users.service";
 
 export default class UserControllers {
-    private service: UserService;
 
-    constructor() { this.service = new UserService() }
+    constructor(readonly service:UserService) {  }
 
     public async getRegister(_req: Request, res: Response) {
         const result = await this.service.getAll()

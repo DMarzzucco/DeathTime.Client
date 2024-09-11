@@ -2,7 +2,10 @@ import express, { Application } from "express";
 import cors from "cors";
 import bodyParser from "body-parser"
 import UserRoutes from "../routes/user.routes";
-
+import SwaggerUI from "swagger-ui-express"
+import swaggerJsDoc from "swagger-jsdoc"
+import { options } from "../swagger/swagger.options";
+import { errorHandler } from "../middleware/errors/error.handler";
 export class App {
     private app: Application;
     constructor(private port?: string | number) {
@@ -12,6 +15,8 @@ export class App {
         this.middleware();
         // routes
         this.Routes();
+        // swagger
+        this.Swagger();
     }
 
     private middleware() {
@@ -24,6 +29,11 @@ export class App {
 
     private Routes(): void {
         this.app.use('/api', UserRoutes)
+        this.app.use(errorHandler)
+    }
+    private Swagger(){
+        const specs = swaggerJsDoc(options)
+        this.app.use ("/docs", SwaggerUI.serve,SwaggerUI.setup(specs))
     }
     settings() {
         this.app.set('port', this.port || process.env.PORT || 3000)

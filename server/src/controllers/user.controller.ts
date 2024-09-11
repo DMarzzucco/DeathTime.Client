@@ -22,7 +22,7 @@ export default class UserControllers {
         return res.status(result.statusCode).json(result.body)
     })
     public updateRegister = asyncHandler(async (req: Request, res: Response) => {
-        const userId = parseInt(req.body.id)
+        const userId = parseInt(req.params.id)
         const object: dateCreate = req.body
         const result = await this.service.update(userId, object)
         return res.status(result.statusCode).json(result.body)

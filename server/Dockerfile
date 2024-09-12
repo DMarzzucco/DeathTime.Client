@@ -12,9 +12,9 @@ RUN chmod +x /usr/local/bin/wait-for-it.sh
 ARG DATABASE_URL
 ENV DATABASE_URL=${DATABASE_URL}
 
-EXPOSE 3001
+EXPOSE 3000
 
 CMD /usr/local/bin/wait-for-it db:5432 --timeout=60 --strict -- \
     npx prisma generate && \
     npx prisma migrate deploy && \  
-    npm run start:prod
+    npm run dev

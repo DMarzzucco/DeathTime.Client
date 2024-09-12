@@ -10,8 +10,8 @@ const ShowUsers: React.FC = () => {
         return () => clearInterval(interval)
     }, [pre.fetchUser])
     return (
-        <div className="bg-slate-400 pt-5 w-full px-2 my-1 rounded-lg">
-            <div className=" flex flex-col w-full justify-center items-center h-200 overflow-y-auto my-2 border bg-slate-800 border-slate-400">
+        <div className=" flex justify-center items-center pt-5 w-full px-2 my-1 rounded-lg">
+            <div className=" flex flex-col  h-200 overflow-y-auto my-2 shadow-2xl rounded-lg w-1/2">
                 <ListUsers users={pre.users} />
             </div>
         </div>

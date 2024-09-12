@@ -30,6 +30,7 @@ services:
       - /app/mode_modules
     networks:
       - app-networks
+
   client:
     build: ./client
     ports:
@@ -40,7 +41,8 @@ services:
     environment:
       SERVER_URL: http://host.docker.internal:3000/api
     networks:
-      - app-network
+      - app-networks
+      
 volumes:
   postgres-data:
 

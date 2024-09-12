@@ -1,4 +1,6 @@
-# Register Date with No Paid Incluid
+# Register Date with Death Time Incluid
+
+![Mi genial imagen](img/Example.jpg)
 
 This is an example of how the Death Time middleware works.
 

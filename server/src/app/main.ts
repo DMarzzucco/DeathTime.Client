@@ -21,7 +21,8 @@ export class App {
 
     private middleware() {
         this.app.use(cors({
-            origin: "http://localhost:5173",
+            // origin: "http://localhost:5173",
+            origin: "http://localhost:4173",
             credentials: true
         }))
         this.app.use(bodyParser.json())

@@ -20,15 +20,22 @@ export const ConfirmMess: React.FC = () => {
         </div>
     )
 }
+export const NoDataRecord: React.FC = () => {
+    return (
+        <div className="flex w-full justify-center items-center h-full">
+            <h2 className="text-xl font-semibold">No data Record</h2>
+        </div>
+    )
+}
 export const ListUsers: React.FC<{ users: User[] }> = ({ users }) => {
 
-    return (users && users.length > 0 ? users.map(user => (
+    return (users.map(user => (
         <div key={user.id} className="flex flex-col w-full justify-start items-start p-1  shadow-xl  ">
             <h2 className="font-bold text-xl text-red-500">{user.name}</h2>
             <div className="flex flex-col justify-start items-start">
                 <p>age: <span className="font-bold">{user.age}</span> </p>
                 <p>email: <span className="font-bold">{user.email}</span></p>
             </div>
-        </div>)) : <p className="font-bold text-xl">No data record</p>
+        </div>))
     )
 }

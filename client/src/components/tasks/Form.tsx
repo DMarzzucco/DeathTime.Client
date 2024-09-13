@@ -1,18 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { DateProps } from "../../interface";
 import { useAuth } from "../../context/Auth.context";
 import { ConfirmMess, ErrorInput } from "../ui/comps.ui";
+import { DateProps } from "../../interface";
 
-const FormUsers: React.FC<{ data: DateProps }> = ({ data }) => {
+const FormUsers: React.FC = () => {
     const { ...pre } = useAuth()
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        defaultValues: {
-            name: data?.name,
-            age: data?.age,
-            email: data?.email
-        }
-    })
+    const { register, handleSubmit, formState: { errors } } = useForm<DateProps>()
     const onSubmit = handleSubmit(async (data) => { pre.fetchCreater(data) })
     return (
         <form onSubmit={onSubmit} className="flex py-3 px-4 m-2 flex-col justify-center items-center  rounded-xl shadow-md shadow-red-600">

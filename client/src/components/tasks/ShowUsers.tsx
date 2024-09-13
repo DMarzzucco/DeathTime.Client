@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth } from "../../context/Auth.context";
-import { ListUsers } from "../ui/comps.ui";
+import { ListUsers, NoDataRecord } from "../ui/comps.ui";
 
 const ShowUsers: React.FC = () => {
     const { ...pre } = useAuth()
@@ -12,7 +12,9 @@ const ShowUsers: React.FC = () => {
     return (
         <div className=" flex justify-center items-center pt-5 w-full px-2 my-1 rounded-lg">
             <div className=" flex flex-col  h-200 overflow-y-auto my-2 shadow-2xl rounded-lg w-1/2">
-                <ListUsers users={pre.users} />
+                {pre.users && pre.users.length > 0 ?
+                    <ListUsers users={pre.users} /> : <NoDataRecord />
+                }
             </div>
         </div>
     )

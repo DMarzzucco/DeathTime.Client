@@ -5,6 +5,7 @@ import { CreateResponse, GetAllResponse } from "../api/Api";
 export const AuthContext = createContext<contextProps | undefined>(undefined);
 
 const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    // const [data, setData] = React.useState<DateProps>()
     const [users, setUsers] = React.useState<User[]>([]);
     const [confirm, setConfirm] = React.useState<boolean>(false);
 
@@ -22,6 +23,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     }
     const Values = React.useMemo(() => ({
         users,
+        // data,
         confirm,
         fetchUser,
         fetchCreater

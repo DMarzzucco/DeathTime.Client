@@ -6,7 +6,7 @@ export const options = {
             version: "1.0.0",
             description: "DeathTime Example"
         },
-        servers: [{ url: "http://localhost:3000/api" }]
+        servers: [{ url: "http://localhost:3001/api" }]
     },
     apis:["./src/routes/*.ts"]
 }

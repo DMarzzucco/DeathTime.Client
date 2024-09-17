@@ -21,8 +21,7 @@ export class App {
 
     private middleware() {
         this.app.use(cors({
-            // origin: "http://localhost:5173",
-            origin: "http://localhost:4173",
+            origin: "http://localhost:3000",
             credentials: true
         }))
         this.app.use(bodyParser.json())
@@ -32,12 +31,12 @@ export class App {
         this.app.use('/api', UserRoutes)
         this.app.use(errorHandler)
     }
-    private Swagger(){
+    private Swagger() {
         const specs = swaggerJsDoc(options)
-        this.app.use ("/docs", SwaggerUI.serve,SwaggerUI.setup(specs))
+        this.app.use("/docs", SwaggerUI.serve, SwaggerUI.setup(specs))
     }
     settings() {
-        this.app.set('port', this.port || process.env.PORT || 3000)
+        this.app.set('port', this.port || process.env.PORT || 3001)
     }
     async listen() {
         await this.app.listen(this.app.get('port'))

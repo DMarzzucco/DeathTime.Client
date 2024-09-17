@@ -20,7 +20,7 @@ services:
       args:
         DATABASE_URL: postgres://user:password@db:5432/data_base
     ports:
-      - "3000:3000"
+      - "3001:3001"
     depends_on:
       - db
     environment:
@@ -34,15 +34,15 @@ services:
   client:
     build: ./client
     ports:
-      - "4173:4173"
+      - "3000:3000"
     volumes:
       - ./client:/app
       - /client/node_modules
     environment:
-      SERVER_URL: http://host.docker.internal:3000/api
+      SERVER_URL: http://host.docker.internal:3001/api
     networks:
       - app-networks
-      
+
 volumes:
   postgres-data:
 

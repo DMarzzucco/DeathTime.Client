@@ -8,17 +8,14 @@ export interface ServiceResponse<T> {
         details?: string;
     }
 }
-export interface dateCreate {
-    id?: number;
+export interface Date {
+    id: number;
     name: string;
     age: string;
     email: string
-    create_time?: Date
-    update_time?: Date
+    create_time: Date
+    update_time: Date
 }
+export interface dateCreate extends Omit<Date, 'id' | 'create_time' | 'update_time'> { }
 
-export interface updateCreate {
-    name?: string;
-    age?: string;
-    email?: string
-}
+export interface updateCreate extends Partial<dateCreate> { }

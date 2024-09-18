@@ -8,10 +8,11 @@ import { CreateResponse } from "../service/api.service";
 import { useRouter } from "next/navigation";
 
 export const FormUsers: React.FC = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<User>()
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<User>()
     const Router = useRouter()
     const onSubmit = handleSubmit(async (data) => {
         await CreateResponse(data)
+        reset()
         Router.refresh()
     })
     return (
@@ -29,7 +30,6 @@ export const FormUsers: React.FC = () => {
             />
             {errors.email && <ErrorInput title="Email" />}
             <button className="my-2" type="submit">SEND</button>
-            {/* {pre.confirm && <ConfirmMess />} */}
         </form>
     )
 }

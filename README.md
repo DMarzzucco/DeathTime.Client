@@ -28,11 +28,13 @@ $ docker-compose up
 $ docker-compose up db
 
 # Start server inside the  `./server` folder
+$ npm install
 $ npx prisma generate
 $ npx prisma migrate deploy
 $ npm run dev
 
 # Start client inside the `./client` folder
+$ npm install
 $ npm run dev
 ``` 
 

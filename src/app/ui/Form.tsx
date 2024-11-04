@@ -4,7 +4,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { ErrorInput } from "./components/ui.compst";
 import { User } from "@/interfaces";
-import { CreateResponse } from "../service/api.service";
+import { CreateResponse } from "../server/services/api.service";
 import { useRouter } from "next/navigation";
 
 export const FormUsers: React.FC = () => {

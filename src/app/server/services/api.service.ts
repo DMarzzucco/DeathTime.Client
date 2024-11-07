@@ -26,8 +26,23 @@ export async function GetAllResponse() {
             throw new Error(`${res.status} ${res.statusText}`)
         }
         return res.json()
-    } catch (error:any) {
-        console.error("THE ERROR IS:",error)
+    } catch (error: any) {
+        console.error("THE ERROR IS:", error)
         throw new Error(error.message)
     }
+}
+export async function DeleteResponse(id: number) {
+    try {
+        const res = await fetch(`${server}/User/${id}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" }
+        })
+        if (!res.ok) {
+            throw new Error(`${res.status}${res.statusText}`)
+        }
+        return res;
+    } catch (error: any) {
+        throw new Error(error.message)
+    }
+
 }

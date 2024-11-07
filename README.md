@@ -6,11 +6,41 @@ This is an example of how the Death Time middleware works.
 
 ## Before Installation
 
-Before continuing you will need an API to test DeathTime
+Before continuing you will need an API to test DeathTime and configure ```src/app/ui/List.tsx``` 
+
+## Router configure
+
+`` .env.local ``
+
+```
+# <<-APIs REST->>
+
+# Express 
+#----------------------------------
+# Docker
+# NEXT_PUBLIC_SERVICE_URL="http://host.docker.internal:3001/api"
+#----------------------------------
+# Local
+# NEXT_PUBLIC_SERVICE_URL="http://localhost:3001/api"
+#
+#
+#
+#
+#
+# ASP.NET
+#----------------------------------
+# Local
+# NEXT_PUBLIC_SERVICE_URL="http://localhost:5024/api"
+
+
+
+```
 
 ## API
 
-[Express-API](http://localhost:5173)
+[.NET-API](https://github.com/DMarzzucco/DeathTime.ASP.NET.git)
+
+[Express-API](https://github.com/DMarzzucco/DeathTime.Express-API.git)
 
 ## Requirements
 
@@ -29,7 +59,7 @@ $ npm run dev
 
 ## Port
 
-[localhost:5173](http://localhost:5173)
+[localhost:3000](http://localhost:3000)
 
 ## Author
 

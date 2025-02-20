@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: data_base
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+#SpringBoot
+  server:
+    build:
+      context: .
+      dockerfile: servers/spring/Dockerfile
+    container_name: app_service
+    restart: always
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/data_base
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=password
+      - PORT=8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+#ASP.NET
+  # server:
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - ASPNETCORE_HTTP_PORTS=8080
+  #     - ASPNETCORE_HTTPS_PORTS=8080
+  #   container_name: death_time.net
+  #   image: ${DOCKER_REGISTRY-}d_t_source
+  #   build:
+  #     context: .
+  #     dockerfile: servers/asp_net/D_T_Source/Dockerfile
+  #   ports:
+  #     - "8080:8080"
+  #   networks:
+  #     - compose-bridge
+  #   depends_on:
+  #     - db
+
+  client:
+    build: ./client
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/app
+      - /client/node_modules
+    environment:
+      NEXT_PUBLIC_BACKEND_URL: http://host.docker.internal:3001/api
+        # NEXT_PUBLIC_BACKEND_URL: http://server:3001/api
+    networks:
+      - app-network
+
+
+volumes:
+  postgres-data:
+
+networks:
+  app-network:
+    driver: bridge
